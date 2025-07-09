@@ -281,6 +281,98 @@ Using OneCycleLR Learning Rate Scheduler. It is a dynamic scheduelr that: <br>
 - Improves convergence & generalization.
 
 # Training
+Forward Propogation, Loss Calculation, Backward Propagation, Weight Update.<br><br>
+
+### Warmup Loop
+Making adjustments to the hyperparameters, architecture, loss functions, etc can cause early epochs to act up adjusting to the changes made. Thus implementing a warmup loop. <br>
+- A 2-epoch warmup with a reduced learning rate (1e-4) using a separate AdamW optimizer to stabilize initial convergence.<br>
+
+### Training Loop
+training runs for 25 epochs (27 including the 2 warmup) using the main AdamW optimizer & OneCycleLR learning rate scheduler. <br>
+- Manual learning rate decay is applied at epoch 15 (10x drop) to encourage finer convergence.<br>
+- Epochs compute: Train Loss, Train PSNR, Train SSIM, Val Loss, VaL PSNR, Val SSIM, LR <br>
+- Best-performing model (lowest val loss) is saved to wm_best_model.pth <br>
+- Training halts early if no improvement is seen for early_stop_patience epochs.
+
+### Results:
+```
+Warmup Epoch 1 | Loss: 6.72903
+Warmup Epoch 2 | Loss: 3.8560
+Epoch [1/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:20<00:00,  4.32s/it]
+Epoch 1: Train Loss=4.7524, Train PSNR=14.79, Train SSIM=0.3273 , Val Loss=4.1361, Val PSNR=15.20, Val SSIM=0.3542, LR=0.000134
+Epoch [2/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:36<00:00,  4.51s/it]
+Epoch 2: Train Loss=3.8627, Train PSNR=16.61, Train SSIM=0.3853 , Val Loss=2.8606, Val PSNR=18.33, Val SSIM=0.4380, LR=0.000229
+Epoch [3/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:33<00:00,  4.48s/it]
+Epoch 3: Train Loss=2.6319, Train PSNR=19.94, Train SSIM=0.4862 , Val Loss=1.6640, Val PSNR=22.47, Val SSIM=0.5786, LR=0.000372
+Epoch [4/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:37<00:00,  4.52s/it]
+Epoch 4: Train Loss=1.5781, Train PSNR=23.88, Train SSIM=0.6011 , Val Loss=1.2799, Val PSNR=24.28, Val SSIM=0.6117, LR=0.000542
+Epoch [5/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:26<00:00,  4.39s/it]
+Epoch 5: Train Loss=1.3406, Train PSNR=25.09, Train SSIM=0.6366 , Val Loss=1.1182, Val PSNR=25.67, Val SSIM=0.6214, LR=0.000713
+Epoch [6/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:38<00:00,  4.53s/it]
+Epoch 6: Train Loss=1.3366, Train PSNR=25.31, Train SSIM=0.6567 , Val Loss=0.9333, Val PSNR=26.98, Val SSIM=0.6998, LR=0.000860
+Epoch [7/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:33<00:00,  4.48s/it]
+Epoch 7: Train Loss=1.3522, Train PSNR=25.02, Train SSIM=0.6596 , Val Loss=1.0313, Val PSNR=26.46, Val SSIM=0.6463, LR=0.000960
+Epoch [8/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:35<00:00,  4.50s/it]
+Epoch 8: Train Loss=1.2893, Train PSNR=25.61, Train SSIM=0.6700 , Val Loss=1.0174, Val PSNR=26.29, Val SSIM=0.6912, LR=0.001000
+Epoch [9/25]: 100%|█████████████████████████████████████████████████| 88/88 [06:39<00:00,  4.53s/it]
+Epoch 9: Train Loss=1.2259, Train PSNR=25.95, Train SSIM=0.6788 , Val Loss=0.9617, Val PSNR=26.69, Val SSIM=0.6800, LR=0.000994
+Epoch [10/25]: 100%|████████████████████████████████████████████████| 88/88 [06:31<00:00,  4.45s/it]
+Epoch 10: Train Loss=1.2163, Train PSNR=26.00, Train SSIM=0.6792 , Val Loss=0.9782, Val PSNR=26.75, Val SSIM=0.6751, LR=0.000975
+Epoch [11/25]: 100%|████████████████████████████████████████████████| 88/88 [06:44<00:00,  4.59s/it]
+Epoch 11: Train Loss=1.2225, Train PSNR=26.00, Train SSIM=0.6952 , Val Loss=0.8795, Val PSNR=27.65, Val SSIM=0.7164, LR=0.000943
+Epoch [12/25]: 100%|████████████████████████████████████████████████| 88/88 [06:36<00:00,  4.51s/it]
+Epoch 12: Train Loss=1.2029, Train PSNR=26.03, Train SSIM=0.6865 , Val Loss=0.9174, Val PSNR=27.46, Val SSIM=0.6902, LR=0.000898
+Epoch [13/25]: 100%|████████████████████████████████████████████████| 88/88 [06:42<00:00,  4.57s/it]
+Epoch 13: Train Loss=1.1444, Train PSNR=26.32, Train SSIM=0.6899 , Val Loss=0.8914, Val PSNR=27.29, Val SSIM=0.6994, LR=0.000843
+Epoch [14/25]: 100%|████████████████████████████████████████████████| 88/88 [06:34<00:00,  4.49s/it]
+Epoch 14: Train Loss=1.2011, Train PSNR=26.00, Train SSIM=0.6932 , Val Loss=0.8762, Val PSNR=27.71, Val SSIM=0.7081, LR=0.000778
+Epoch [15/25]: 100%|████████████████████████████████████████████████| 88/88 [06:43<00:00,  4.59s/it]
+Epoch 15: Train Loss=1.1981, Train PSNR=26.01, Train SSIM=0.6880 , Val Loss=0.8976, Val PSNR=27.41, Val SSIM=0.7213, LR=0.000705
+Lowering learning rate by 10x for fine-tuning phase.
+Epoch [16/25]: 100%|████████████████████████████████████████████████| 88/88 [06:41<00:00,  4.56s/it]
+Epoch 16: Train Loss=1.1729, Train PSNR=26.21, Train SSIM=0.6848 , Val Loss=0.9213, Val PSNR=27.10, Val SSIM=0.6916, LR=0.000627
+Epoch [17/25]: 100%|████████████████████████████████████████████████| 88/88 [06:43<00:00,  4.59s/it]
+Epoch 17: Train Loss=1.1742, Train PSNR=26.08, Train SSIM=0.6929 , Val Loss=0.9165, Val PSNR=26.96, Val SSIM=0.7061, LR=0.000545
+Epoch [18/25]: 100%|████████████████████████████████████████████████| 88/88 [06:57<00:00,  4.74s/it]
+Epoch 18: Train Loss=1.1629, Train PSNR=26.25, Train SSIM=0.6963 , Val Loss=0.8613, Val PSNR=27.75, Val SSIM=0.7229, LR=0.000462
+Epoch [19/25]: 100%|████████████████████████████████████████████████| 88/88 [06:46<00:00,  4.62s/it]
+Epoch 19: Train Loss=1.1667, Train PSNR=26.12, Train SSIM=0.6958 , Val Loss=0.8495, Val PSNR=27.56, Val SSIM=0.7105, LR=0.000380
+Epoch [20/25]: 100%|████████████████████████████████████████████████| 88/88 [06:46<00:00,  4.62s/it]
+Epoch 20: Train Loss=1.1428, Train PSNR=26.28, Train SSIM=0.6810 , Val Loss=0.8530, Val PSNR=27.83, Val SSIM=0.7173, LR=0.000302
+Epoch [21/25]: 100%|████████████████████████████████████████████████| 88/88 [06:46<00:00,  4.62s/it]
+Epoch 21: Train Loss=1.1608, Train PSNR=26.27, Train SSIM=0.6959 , Val Loss=0.8109, Val PSNR=27.90, Val SSIM=0.7294, LR=0.000229
+Epoch [22/25]: 100%|████████████████████████████████████████████████| 88/88 [06:31<00:00,  4.45s/it]
+Epoch 22: Train Loss=1.1382, Train PSNR=26.19, Train SSIM=0.6985 , Val Loss=0.8479, Val PSNR=27.54, Val SSIM=0.7122, LR=0.000163
+Epoch [23/25]: 100%|████████████████████████████████████████████████| 88/88 [06:39<00:00,  4.54s/it]
+Epoch 23: Train Loss=1.0897, Train PSNR=26.64, Train SSIM=0.7037 , Val Loss=0.8687, Val PSNR=27.52, Val SSIM=0.7099, LR=0.000107
+Epoch [24/25]: 100%|████████████████████████████████████████████████| 88/88 [06:37<00:00,  4.52s/it]
+Epoch 24: Train Loss=1.1151, Train PSNR=26.60, Train SSIM=0.7008 , Val Loss=0.8570, Val PSNR=27.33, Val SSIM=0.7125, LR=0.000061
+Epoch [25/25]: 100%|████████████████████████████████████████████████| 88/88 [06:36<00:00,  4.50s/it]
+Epoch 25: Train Loss=1.1098, Train PSNR=26.65, Train SSIM=0.6970 , Val Loss=0.8431, Val PSNR=27.54, Val SSIM=0.7151, LR=0.000028
+
+Training Time Elapsed: 228.00 Minutes
+```
+
+# Metrics & Visuals
+All of the outputs that I used to make adjustments to the model as needed after each training run.
+## Metrics
+### Evaluation
+```
+Test Loss: 0.7706
+Test PSNR: 28.67 dB
+Test SSIM: 0.7202
+```
+## Visuals
+### Residual Histogram
+<div align="center">
+  <img src="outputs/visuals/residualhistogram.png" alt="residual histogram" width="600"/>
+</div>
+
+
+
+
+
+
 
 
 # Referenced Paper
