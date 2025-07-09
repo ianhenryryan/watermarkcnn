@@ -106,7 +106,20 @@ The dataset I threw together contains selfies, group pictures, nature, cities, a
   <img src="outputs/visuals/Heterogeneous_U-Net_CNN_Arch.png" alt="Heterogeneous U-Net Architecture" width="600"/>
 </div>
 
-# Loss Functions
+# Loss Function
+There are multiple components to the loss function.
+
+
+
+# Total Parameters
+Total Parameters: 5383366<br>
+Trainable Parameters: 3647878<br><br>
+
+The reason only 3647878 are trainable is that the other 1735488 are being used in VGG
+
+# Data Generation (Self-Supervised)
+This section contains: Watermark Generation, Watermark Application, Generate Pair, Data Augmentation, & Watermark Dataset Class
+
 
 # Referenced Paper
 https://arxiv.org/html/2403.05807v1
