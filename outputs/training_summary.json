@@ -1,0 +1,14 @@
+{
+    "best_loss": 1.1044580760327252,
+    "epochs_run": 15,
+    "train_loss_final": 1.1448768573728474,
+    "val_loss_final": 0.7949803733825683,
+    "psnr_final": 26.29967143867555,
+    "val_psnr_final": 28.115815158933877,
+    "ssim_final": 0.6918278959664431,
+    "val_ssim_final": 0.7323709774017334,
+    "training_time_min": 150.52,
+    "learning_rate_end": 6.82703838038663e-05,
+    "optimizer": "AdamW",
+    "criterion": "ColorAwareLoss"
+}
