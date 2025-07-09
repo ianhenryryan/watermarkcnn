@@ -3,7 +3,9 @@ Machine Learning Engineer (aspiring): Ian H. Ryan<br>
 Version: 0.1<br>
 Timeline: May 22, 2025 - June 24th, 2025<br><br>
 
-Upon making a variety of image scrapers for the world wide web, I noticed that a portion of the images I found contained watermarks. This sprung the idea of creating a deep learning model with the use case of removing watermarks from images. I found a research paper on ArXiv called A self-supervised CNN for image watermark removal. I used it as a reference for this project.
+Upon making a variety of image scrapers for the world wide web, I noticed that a portion of the images I found contained watermarks. This sprung the idea of creating a deep learning model with the use case of removing watermarks from images. I found a research paper on ArXiv called <a href="https://arxiv.org/html/2403.05807v1" target="_blank">
+        A self-supervised CNN for image watermark removal
+    </a>. I used it as a reference for this project.
 
 # Environment
 - **Make & Model**:        Alienware m15 R7
