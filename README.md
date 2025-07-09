@@ -95,6 +95,16 @@ Aim to create or find a dataset that is diverse in textures, colors, brightness,
 The dataset I threw together contains selfies, group pictures, nature, cities, animals, parties, etc.
 
 # Heterogeneous U-Net CNN Architecture
+- **Encoder-Decoder Backbone** - multi-resolution feature extraction.
+- **DoubleConv Blocks** - ReLU and LeakyReLU to capture diverse activations.
+- **Attention Gates** - at each skip connection for feature relevance gating.
+- **Learnable Upsampling (Transpose Convs)** avoid interpolation artifcats from bilinear.
+- **Self-Attention Bottleneck** - global spatial context.
+- **Perceptual Feature Extractor (VGG16)** - texture-aware loss.
+
+<div align="center">
+  <img src="outputs/visuals/Heterogeneous_U-Net_CNN_Arch.png" alt="Heterogeneous U-Net Architecture" width="600"/>
+</div>
 
 # Loss Functions
 
