@@ -51,21 +51,21 @@ Upon making a variety of image scrapers for the world wide web, I noticed that a
     - [Summary](#summary)
     - [Evaluation Cell (For Restoration CNN)](#evaluate-cell)
     - [Test Results CSV & JSON](#test-results)
-    - [Check class representation in the dataset](#check-class-representation-in-the-dataset)
-    - [Print out some of the test images the model predicted as class 0](#print-out-some-of-the-test-images-the-model-predicted-as-class-0)
   - [Visuals](#visuals)
+    - [Residual Histogram](#res-hist)
+    - [Local PSNR/SSIM Maps](#loc-psnrssim)
+    - [Side by side Comparison](#side-comp)
+    - [Watermark Residual](#wm-res)
+    - [Training Progress](#train-prog)
+    - [Watermark Attention](#wm-att)
+    - [Batch Processing](#batch-proc)
     - [Learning Rate Visual](#learning-rate-visual)
-    - [F1-Score over Epochs Validation](#f1-score-over-epochs-validation)
-    - [Training/Validation Curves](#trainingvalidation-curves)
-    - [Training & Validation Loss Plots](#training--validation-loss-plots)
-    - [Confusion Matrices](#confusion-matrices)
-    - [Feature Maps](#feature-maps)
+    - [Train Loss, Peak Signal-to-Noise Ratio, Structural Similarity Index](#ind-plots)
+    - [Residual Error](#res-error)
+    - [Multi-Layer Activation](#mult-act)
+    - [Feature Activation Maps (Decoder Focus)](#dec-focus)
     - [Kernel/Visualizations](#kernelvisualizations)
     - [Gradient Visualization](#gradient-visualization)
-    - [CAM/Grad-CAM](#camgrad-cam)
-    - [Explainability Tools](#explainability-tools)
-    - [Side-by-Side: Original, IG, and Grad-CAM](#side-by-side-original-ig-and-grad-cam)
-    - [Compare with Target Class (Grad-CAM)](#compare-with-target-class-grad-cam)
 - [Literature Cited](#literature-cited)
 - [Environment](#environment)
 - [Recommended Resources](#recommended-resources)
@@ -91,8 +91,12 @@ Aim to create or find a dataset that is diverse in textures, colors, brightness,
     </a>
 </p>
 
+<br>
+The dataset I threw together contains selfies, group pictures, nature, cities, animals, parties, etc.
+
 # Heterogeneous U-Net CNN Architecture
 
+# Loss Functions
 
 # Referenced Paper
 https://arxiv.org/html/2403.05807v1
