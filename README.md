@@ -374,23 +374,30 @@ Test SSIM: 0.7202
 <div align="center">
   <img src="outputs/visuals/TrainvallosspsnrProgress.png" alt="trainvallosspsnr" width="600"/>
 </div>
+Plots show loss & PSNR over time for both training and validation sets. These curves verify the convergence behavior of the network, confirm generalization to unseen validation data, and track performance metrics epoch-by-epoch.
+
 
 
 ### Training Loss, Peak Signal to Noise Ratio, & Structural Similarity Plots
 <div align="center">
   <img src="outputs/visuals/TrainLossPSNRSSIMplots.png" alt="trainlosspsnrssim" width="600"/>
 </div>
-Plots show loss, PSNR, and SSIM over time for both training and validation sets. These curves verify the convergence behavior of the network, confirm generalization to unseen validation data, and track performance metrics epoch-by-epoch.
+Three synchronized subplots provide a compact summary of the network’s learning trajectory:<br>
+- Loss Curve: steady convergence from high initial error.<br>
+- PSNR Curve: clear climb toward 26–27 dB, a common benchmark in high-fidelity restoration.<br>
+- SSIM Curve: shows perceptual similarity nearing ~0.70, indicating structural retention of clean images.
 
 ### Learning Rate Scheduler
 <div align="center">
   <img src="outputs/visuals/learningratescheduler.png" alt="lrsched" width="600"/>
 </div>
+OneCycleLR plot shows the cyclical learning rate schedule used during training. The LR increases for the first 30% of epochs (warm-up), then decays gradually—helping the model converge quickly while avoiding sharp minima.
 
 ### Local PSNR & Local SSIM Maps
 <div align="center">
   <img src="outputs/visuals/local_psnr_map.png" alt="locpsnr" width="600"/>
 </div>
+These heatmaps depict spatially localized Peak Signal-to-Noise Ratio (PSNR) and Structural Similarity Index (SSIM) metrics across image patches. Brighter regions indicate higher fidelity restoration, offering insight into performance variability across different spatial contexts
 <div align="center">
   <img src="outputs/visuals/local_ssim_map.png" alt="locssim" width="600"/>
 </div>
@@ -405,42 +412,50 @@ histogram displays the distribution of absolute pixel-wise residuals between the
 <div align="center">
   <img src="outputs/visuals/sidebysidecomp.png" alt="sidebyside" width="600"/>
 </div>
+Visual triplets are shown in three columns: the clean original, the watermarked version, and the predicted output. These qualitative results help highlight how well the model removes diverse watermark styles, maintaining visual structure and content.
 
 ### Watermark Residual
 <div align="center">
   <img src="outputs/visuals/watermarkresidual.png" alt="wm res" width="600"/>
 </div>
-
+A three-panel plot visualizes the residual heatmap, a binary thresholded mask, and the original vs predicted absolute difference. This highlights exactly where watermark artifacts remain and how well they’re suppressed in the output.
 
 ### Watermark Attention
 <div align="center">
   <img src="outputs/visuals/watermarkattention.png" alt="wm att" width="600"/>
 </div>
-
+Decoder-level attention maps (heatmaps) illustrate how different layers in the network respond to watermark perturbations. This diagnostic tool verifies that deeper layers are focusing on regions corrupted by watermarks—demonstrating task-specific feature learning.
 
 ### Batch Processing
 <div align="center">
   <img src="outputs/visuals/batchprocessing.png" alt="batchproc" width="600"/>
 </div>
-
+This view shows the entire training batch as input, reference, and predicted samples across multiple augmentations. It’s useful to understand the model’s robustness to various synthetic watermark styles generated on-the-fly.
 
 ### Residual Error 
 <div align="center">
   <img src="outputs/visuals/reserror.png" alt="reserror" width="600"/>
 </div>
-
+Highlights pixel-level discrepancies between the original and predicted outputs using three subplots:<br>
+- Residual Heatmap: This shows the absolute error (|original - predicted|) in pixel intensities. Brighter areas signify larger prediction errors, often correlated with watermark regions.<br>
+- Thresholded Mask (> 0.1): Highlights only those pixels where the residual exceeds a certain perceptual threshold (0.1). This isolates major prediction faults or watermark remnants.<br>
+- Overlay of Original vs Predicted: Gives a side-by-side visual of the predicted error distribution relative to the original image, making it easy to spot spatial trends in reconstruction quality.<br>
+ Helps pinpoint where the model struggles, and guides improvements to the network or loss function.
 
 ### Multi-Layer Activation 
 <div align="center">
-  <img src="outputs/visuals/reserror.png" alt="reserror" width="600"/>
+  <img src="outputs/visuals/multlayeract.png" alt="multact" width="600"/>
 </div>
-
+Visualizes encoder and decoder layer outputs (e.g., enc1, enc2, dec1, dec2, dec3). Which reveals internal representation learning and feature abstraction across layers. It is useful for understanding how watermark-related features propagate through the network.
 
 ### Feature Activation Maps (Decoder Focus) 
 <div align="center">
-  <img src="outputs/visuals/reserror.png" alt="reserror" width="600"/>
+  <img src="outputs/visuals/featactdecodefocus.png" alt="featactdec" width="600"/>
 </div>
-
+Feature maps from deeper decoder layers of the U-Net architecture:<br>
+- The right-side plot shows the activation map from dec3 (final decoder layer before output), scaled from 0 to 1.<br>
+- It reveals where the model is focusing its attention during reconstruction, particularly in recovering watermark-affected areas.<br>
+The decoder’s high response in watermark-heavy zones suggests successful spatial attention learning. This also acts as a diagnostic tool to ensure the decoder is not ignoring important visual features.
 
 # Referenced Paper
 https://arxiv.org/html/2403.05807v1
