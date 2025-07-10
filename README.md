@@ -352,6 +352,12 @@ Epoch 25: Train Loss=1.1098, Train PSNR=26.65, Train SSIM=0.6970 , Val Loss=0.84
 
 Training Time Elapsed: 228.00 Minutes
 ```
+Summary:
+- The warmup phase helped stabilize initial training as seen with the loss going from 6.72903 -> 3.8560 from first to second warmup epoch.
+- Train PSNR started at ~14.8 dB and reached ~26.6 dB
+- Val PSNR steadily improved to ~27.5–28 dB, a solid metric for image restoration tasks.
+- Val SSIM reached ~0.72, indicating perceptual quality and structure recovery are good.
+
 
 # Metrics & Visuals
 All of the outputs that I used to make adjustments to the model as needed after each training run.
@@ -363,16 +369,77 @@ Test PSNR: 28.67 dB
 Test SSIM: 0.7202
 ```
 ## Visuals
+
+### Train & Val Loss, PSNR Progress
+<div align="center">
+  <img src="outputs/visuals/TrainvallosspsnrProgress.png" alt="trainvallosspsnr" width="600"/>
+</div>
+
+
+### Training Loss, Peak Signal to Noise Ratio, & Structural Similarity Plots
+<div align="center">
+  <img src="outputs/visuals/TrainLossPSNRSSIMplots.png" alt="trainlosspsnrssim" width="600"/>
+</div>
+Plots show loss, PSNR, and SSIM over time for both training and validation sets. These curves verify the convergence behavior of the network, confirm generalization to unseen validation data, and track performance metrics epoch-by-epoch.
+
+### Learning Rate Scheduler
+<div align="center">
+  <img src="outputs/visuals/learningratescheduler.png" alt="lrsched" width="600"/>
+</div>
+
+### Local PSNR & Local SSIM Maps
+<div align="center">
+  <img src="outputs/visuals/local_psnr_map.png" alt="locpsnr" width="600"/>
+</div>
+<div align="center">
+  <img src="outputs/visuals/local_ssim_map.png" alt="locssim" width="600"/>
+</div>
+
 ### Residual Histogram
 <div align="center">
   <img src="outputs/visuals/residualhistogram.png" alt="residual histogram" width="600"/>
 </div>
+histogram displays the distribution of absolute pixel-wise residuals between the predicted image and the original watermark-free image. A sharp peak near zero indicates strong restoration fidelity, where most pixels are accurately reconstructed with minimal error.
+
+### Side by Side Comparison
+<div align="center">
+  <img src="outputs/visuals/sidebysidecomp.png" alt="sidebyside" width="600"/>
+</div>
+
+### Watermark Residual
+<div align="center">
+  <img src="outputs/visuals/watermarkresidual.png" alt="wm res" width="600"/>
+</div>
 
 
+### Watermark Attention
+<div align="center">
+  <img src="outputs/visuals/watermarkattention.png" alt="wm att" width="600"/>
+</div>
 
 
+### Batch Processing
+<div align="center">
+  <img src="outputs/visuals/batchprocessing.png" alt="batchproc" width="600"/>
+</div>
 
 
+### Residual Error 
+<div align="center">
+  <img src="outputs/visuals/reserror.png" alt="reserror" width="600"/>
+</div>
+
+
+### Multi-Layer Activation 
+<div align="center">
+  <img src="outputs/visuals/reserror.png" alt="reserror" width="600"/>
+</div>
+
+
+### Feature Activation Maps (Decoder Focus) 
+<div align="center">
+  <img src="outputs/visuals/reserror.png" alt="reserror" width="600"/>
+</div>
 
 
 # Referenced Paper
