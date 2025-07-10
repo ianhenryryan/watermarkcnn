@@ -458,7 +458,12 @@ Feature maps from deeper decoder layers of the U-Net architecture:<br>
 The decoder’s high response in watermark-heavy zones suggests successful spatial attention learning. This also acts as a diagnostic tool to ensure the decoder is not ignoring important visual features.
 
 # Referenced Paper
-https://arxiv.org/html/2403.05807v1
-<a href="https://arxiv.org/html/2403.05807v1" target="_blank">
-        A self-supervised CNN for image watermark removal
-    </a> by Chunwei Tian, Member, IEEE, Menghua Zheng, Tiancai Jiao, Wangmeng Zuo, Senior Member, IEEE, Yanning Zhang, Senior Member, IEEE, Chia-Wen Lin, Fellow, IEEE from 9 Mar 2024
+```bibtex
+@article{liu2024heterogeneous,
+  title={Heterogeneous U-Net for Image Restoration},
+  author={Liu, Jiang and Zhang, Yulun and Li, Wangmeng and others},
+  journal={arXiv preprint arXiv:2403.05807},
+  year={2024},
+  url={https://arxiv.org/abs/2403.05807}
+}
+```
