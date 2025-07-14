@@ -220,7 +220,7 @@ Goal of enhancing robustness & domain generalization:<br>
 
 # Transform
 create transform variable and set image size to 256 pixels.<br>
-transform = get_augmentations(image_size=256)
+<pre>transform = get_augmentations(image_size=256)</pre>
 
 # Pathing
 data/clean_images/*.jpg & data/clean_images/*.png <br>
